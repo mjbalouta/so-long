@@ -1,25 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mjoao-fr <mjoao-fr@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/21 15:59:40 by mjoao-fr          #+#    #+#             */
-/*   Updated: 2025/05/21 16:03:37 by mjoao-fr         ###   ########.fr       */
+/*   Created: 2025/05/21 15:59:15 by mjoao-fr          #+#    #+#             */
+/*   Updated: 2025/05/21 16:03:26 by mjoao-fr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int main(int ac, char **av)
-{
-	int	i;
-	char *ext;
+#ifndef SO_LONG_H
+# define SO_LONG_H
 
-	i = 0;
-	if (ac != 2)
-		return (write(1, "Error./nMissing map.", 19));
-	ext = ft_strrchr(av[1], '.');
-	if (ext[1] != 'b' || ext[2] != 'e' || ext[3] != 'r' || ext[4])
-		return (write(1, "Error./nWrong file. Must be .ber.", 32));
-	
-}
+#include "./libft-projects/get-next-line/get_next_line.h"
+#include "./libft-projects/libft/libft.h"
+#include "./libft-projects/printf/libftprintf.h"
+
+#endif

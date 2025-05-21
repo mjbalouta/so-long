@@ -1,25 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_toupper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mjoao-fr <mjoao-fr@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/21 15:59:40 by mjoao-fr          #+#    #+#             */
-/*   Updated: 2025/05/21 16:03:37 by mjoao-fr         ###   ########.fr       */
+/*   Created: 2025/04/07 15:30:55 by mjoao-fr          #+#    #+#             */
+/*   Updated: 2025/04/17 13:09:00 by mjoao-fr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int main(int ac, char **av)
-{
-	int	i;
-	char *ext;
+/**
+ * @file ft_toupper.c
+ * @brief If c is a lowercase letter, toupper()
+returns its uppercase equivalent, if an uppercase
+representation exists in the current locale.
+Otherwise, it returns c. 
+ */
 
-	i = 0;
-	if (ac != 2)
-		return (write(1, "Error./nMissing map.", 19));
-	ext = ft_strrchr(av[1], '.');
-	if (ext[1] != 'b' || ext[2] != 'e' || ext[3] != 'r' || ext[4])
-		return (write(1, "Error./nWrong file. Must be .ber.", 32));
-	
+#include "libft.h"
+
+int	ft_toupper(int c)
+{
+	if (c >= 'a' && c <= 'z')
+	{
+		c = c - 32;
+	}
+	return (c);
 }

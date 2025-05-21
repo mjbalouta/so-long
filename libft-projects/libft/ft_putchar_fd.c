@@ -1,25 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mjoao-fr <mjoao-fr@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/21 15:59:40 by mjoao-fr          #+#    #+#             */
-/*   Updated: 2025/05/21 16:03:37 by mjoao-fr         ###   ########.fr       */
+/*   Created: 2025/04/14 14:21:52 by mjoao-fr          #+#    #+#             */
+/*   Updated: 2025/04/17 11:31:38 by mjoao-fr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int main(int ac, char **av)
-{
-	int	i;
-	char *ext;
+/**
+ * @file ft_putchar_fd.c
+ * @brief Outputs the character ’c’ to the specified file
+descriptor.
+ */
 
-	i = 0;
-	if (ac != 2)
-		return (write(1, "Error./nMissing map.", 19));
-	ext = ft_strrchr(av[1], '.');
-	if (ext[1] != 'b' || ext[2] != 'e' || ext[3] != 'r' || ext[4])
-		return (write(1, "Error./nWrong file. Must be .ber.", 32));
-	
+#include "libft.h"
+
+void	ft_putchar_fd(char c, int fd)
+{
+	write(fd, &c, 1);
 }
+
+/*int main(void)
+{
+    char c = 'c';
+    ft_putchar_fd(c, 1);
+    return (0);
+}*/

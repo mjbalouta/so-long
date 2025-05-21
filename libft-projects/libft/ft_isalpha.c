@@ -1,25 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_isalpha.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mjoao-fr <mjoao-fr@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/21 15:59:40 by mjoao-fr          #+#    #+#             */
-/*   Updated: 2025/05/21 16:03:37 by mjoao-fr         ###   ########.fr       */
+/*   Created: 2025/04/07 15:29:30 by mjoao-fr          #+#    #+#             */
+/*   Updated: 2025/04/17 12:53:37 by mjoao-fr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int main(int ac, char **av)
-{
-	int	i;
-	char *ext;
+/**
+ * @file ft_isalpha.c
+ * @brief checks for an alphabetic character
+ */
 
-	i = 0;
-	if (ac != 2)
-		return (write(1, "Error./nMissing map.", 19));
-	ext = ft_strrchr(av[1], '.');
-	if (ext[1] != 'b' || ext[2] != 'e' || ext[3] != 'r' || ext[4])
-		return (write(1, "Error./nWrong file. Must be .ber.", 32));
-	
+#include "libft.h"
+
+int	ft_isalpha(int c)
+{
+	if ((c >= 65 && c <= 90) || (c >= 97 && c <= 122))
+	{
+		return (1);
+	}
+	return (0);
 }

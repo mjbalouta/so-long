@@ -1,25 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mjoao-fr <mjoao-fr@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/21 15:59:40 by mjoao-fr          #+#    #+#             */
-/*   Updated: 2025/05/21 16:03:37 by mjoao-fr         ###   ########.fr       */
+/*   Created: 2025/04/07 15:30:20 by mjoao-fr          #+#    #+#             */
+/*   Updated: 2025/04/17 13:02:52 by mjoao-fr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int main(int ac, char **av)
+/**
+ * @file ft_strchr.c
+ * @brief returns a pointer to the first occurrence of
+the character c in the string s.
+ */
+
+#include "libft.h"
+
+char	*ft_strchr(const char *s, int c)
 {
 	int	i;
-	char *ext;
 
 	i = 0;
-	if (ac != 2)
-		return (write(1, "Error./nMissing map.", 19));
-	ext = ft_strrchr(av[1], '.');
-	if (ext[1] != 'b' || ext[2] != 'e' || ext[3] != 'r' || ext[4])
-		return (write(1, "Error./nWrong file. Must be .ber.", 32));
-	
+	while (s[i] && s[i] != (char )c)
+		i++;
+	if (s[i] == (char )c || !c)
+		return ((char *)(s + i));
+	return (NULL);
 }
