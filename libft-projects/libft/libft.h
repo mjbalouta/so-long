@@ -6,7 +6,7 @@
 /*   By: mjoao-fr <mjoao-fr@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 15:31:38 by mjoao-fr          #+#    #+#             */
-/*   Updated: 2025/04/17 10:54:51 by mjoao-fr         ###   ########.fr       */
+/*   Updated: 2025/06/02 13:40:57 by mjoao-fr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,5 +113,7 @@ void	ft_lstclear(t_list **lst, void (*del)(void*));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
+
+void	*ft_recalloc(void *ptr, size_t old_size, size_t nmemb, size_t size);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: mjoao-fr <mjoao-fr@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 12:08:03 by mjoao-fr          #+#    #+#             */
-/*   Updated: 2025/05/09 13:30:28 by mjoao-fr         ###   ########.fr       */
+/*   Updated: 2025/06/02 13:54:06 by mjoao-fr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*ft_fill_line(int bytes_read, char *buffer, char **remain, int *found)
 
 	i = -1;
 	z = 0;
-	line = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
+	line = ft_ncalloc(BUFFER_SIZE + 1, sizeof(char));
 	if (!line)
 		return (NULL);
 	while (++i < bytes_read && buffer[i] != '\n' && buffer[i] != '\0')
@@ -42,7 +42,7 @@ char	*ft_read_and_fill(int fd, char *result, char **remain, int *found)
 	char	*buffer;
 	char	*line;
 
-	buffer = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
+	buffer = ft_ncalloc(BUFFER_SIZE + 1, sizeof(char));
 	if (!buffer)
 		return (NULL);
 	bytes_read = read(fd, buffer, BUFFER_SIZE);
@@ -61,7 +61,7 @@ char	*ft_read_and_fill(int fd, char *result, char **remain, int *found)
 		return (ft_free_arrays(buffer, NULL), result);
 	}
 	line = ft_fill_line(bytes_read, buffer, remain, found);
-	result = ft_strjoin(result, line);
+	result = ft_nstrjoin(result, line);
 	return (ft_free_arrays(buffer, line), result);
 }
 
@@ -72,7 +72,7 @@ char	*ft_fill_w_remain(char *result, char **remain, int *found)
 
 	i = 0;
 	z = 0;
-	result = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
+	result = ft_ncalloc(BUFFER_SIZE + 1, sizeof(char));
 	if (!result)
 		return (NULL);
 	while ((*remain)[i] && (*remain)[i] != '\n' && i < BUFFER_SIZE)
@@ -104,7 +104,7 @@ char	*get_next_line(int fd)
 	found = 2;
 	result = NULL;
 	if (!remain)
-		remain = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
+		remain = ft_ncalloc(BUFFER_SIZE + 1, sizeof(char));
 	if (!remain)
 		return (NULL);
 	if (remain[0])

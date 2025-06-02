@@ -6,13 +6,13 @@
 /*   By: mjoao-fr <mjoao-fr@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 11:54:30 by mjoao-fr          #+#    #+#             */
-/*   Updated: 2025/05/09 13:25:25 by mjoao-fr         ###   ########.fr       */
+/*   Updated: 2025/06/02 13:54:08 by mjoao-fr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-size_t	ft_strlen(const char *s)
+size_t	ft_nstrlen(const char *s)
 {
 	size_t	i;
 
@@ -26,7 +26,7 @@ size_t	ft_strlen(const char *s)
 	return (i);
 }
 
-char	*ft_strjoin(char *s1, char *s2)
+char	*ft_nstrjoin(char *s1, char *s2)
 {
 	int		size;
 	char	*ptr;
@@ -35,8 +35,8 @@ char	*ft_strjoin(char *s1, char *s2)
 
 	if (!s1 && !s2)
 		return (NULL);
-	size = ft_strlen(s1) + ft_strlen(s2);
-	ptr = (char *)ft_calloc((size + 1), sizeof(char));
+	size = ft_nstrlen(s1) + ft_nstrlen(s2);
+	ptr = (char *)ft_ncalloc((size + 1), sizeof(char));
 	if (!ptr)
 		return (NULL);
 	i = 0;
@@ -55,7 +55,7 @@ char	*ft_strjoin(char *s1, char *s2)
 	return (ptr);
 }
 
-void	*ft_calloc(size_t nmemb, size_t size)
+void	*ft_ncalloc(size_t nmemb, size_t size)
 {
 	void	*ptr;
 	size_t	i;

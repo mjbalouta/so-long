@@ -24,20 +24,18 @@ $(LIBFT): $(LIBFT_SRC)
 #this make refers to the libft makefile (-C tells make to change directory to libft_dir)
 	@$(MAKE) -C $(LIBFT_DIR) > /dev/null
 	
-%.o: %.c get_next_line.h
+%.o: %.c so_long.h
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 	@@echo "Removing objects..."
 #/dev/null cleans commands from the output
 	@$(MAKE) clean -C $(LIBFT_DIR) > /dev/null
-	@$(MAKE) clean -C $(PRINTF_DIR) > /dev/null
 	@rm -f $(OBJS) 
 
 fclean: clean
 	@@echo "Removing library..."
 	@$(MAKE) fclean -C $(LIBFT_DIR) > /dev/null
-	@$(MAKE) fclean -C $(PRINTF_DIR) > /dev/null
 	@rm -f $(NAME)
 
 re: fclean $(NAME) all
