@@ -1,3 +1,14 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: mjoao-fr <mjoao-fr@student.42porto.com>    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2025/06/02 15:31:27 by mjoao-fr          #+#    #+#              #
+#    Updated: 2025/06/02 15:31:27 by mjoao-fr         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
 CC 			= cc
 CFLAGS		= -Wall -Wextra -Werror -I./Libft -g
@@ -13,22 +24,29 @@ PRINTF 		= ./printf/libftprintf.a
 all: $(NAME) 
 
 $(NAME): $(LIBFT) $(PRINTF) $(OBJS)
-	@@echo "Compiling gnl..."
-#cp copies libft library to the final output
-	@cp $(LIBFT) $(NAME)
-	@cp $(PRINTF) $(NAME)
-	@ar rcs $(NAME) $(OBJS)
-#this tool creates and index for the static library
+	@echo "Building libft..."
+#removes the old static library (if it exists) to prevent duplicates -f avoids errors if file doesn't exist
+	@rm -f $(NAME)
+#-rf deletes everything inside the folder and the folder recursively
+	@rm -rf temp
+#creates temporary folder and -p prevents an error if the folder already exists
+	@mkdir -p temp
+#copies obj files from gnl to the folder
+	@cp $(OBJS) temp/
+#changes directory to the folder and extracts object files from libft.a (ar x unpacks .a archive files into .o files)
+	@cd temp && ar x ../$(LIBFT)
+	@cd temp && ar x ../$(PRINTF)
+#re-archives all previous .o files into the final .a library
+	@ar rcs $(NAME) temp/*.o
 	@ranlib $(NAME)
+	@rm -rf temp
 
 $(LIBFT): $(LIBFT_SRC)
-	@@echo "Compiling libft..."
 #libft depends on libft_dir: if libft is out of date, make will update it
 #this make refers to the libft makefile (-C tells make to change directory to libft_dir)
 	@$(MAKE) -C $(LIBFT_DIR) > /dev/null
 	
 $(PRINTF): $(PRINTF_SRC)
-	@@echo "Compiling printf..."
 #libft depends on libft_dir: if libft is out of date, make will update it
 #this make refers to the libft makefile (-C tells make to change directory to libft_dir)
 	@$(MAKE) -C $(PRINTF_DIR) > /dev/null
@@ -37,7 +55,7 @@ $(PRINTF): $(PRINTF_SRC)
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	@@echo "Removing objects..."
+	@echo "Removing objects..."
 #/dev/null cleans commands from the output
 	@$(MAKE) clean -C $(LIBFT_DIR) > /dev/null
 	@$(MAKE) clean -C $(PRINTF_DIR) > /dev/null

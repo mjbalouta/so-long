@@ -6,13 +6,13 @@
 /*   By: mjoao-fr <mjoao-fr@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 11:02:23 by mjoao-fr          #+#    #+#             */
-/*   Updated: 2025/06/02 13:51:36 by mjoao-fr         ###   ########.fr       */
+/*   Updated: 2025/06/02 15:25:13 by mjoao-fr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int validate_chars(char *map, int *ex_st_col, int curr_size)
+int	*validate_chars(char *map, int *ex_st_col, int curr_size)
 {
 	int i;
 
@@ -20,9 +20,9 @@ int validate_chars(char *map, int *ex_st_col, int curr_size)
 	while (map[i])
 	{
 		if (map[i] != '0' && map[i] != '1' && map[i] != 'C' && map[i] != 'E' && map[i] != 'P')
-			return (1);
+			return (NULL);
 		if ((i == 0 || i == (curr_size - 1)) && map[i] != '1')
-			return (1);
+			return (NULL);
 		if (map[i] == 'E')
 			ex_st_col[0] += 1;
 		else if (map[i] == 'P')
@@ -71,6 +71,8 @@ int validate_map(char **map)
 		if (prev_size != 0 && curr_size != prev_size)
 			return (1);
 		ex_st_col = validate_chars(map[j], ex_st_col, curr_size);
+		if (!ex_st_col)
+			return (1);
 		prev_size = curr_size;
 		j++;
 	}

@@ -6,7 +6,7 @@
 /*   By: mjoao-fr <mjoao-fr@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 15:59:40 by mjoao-fr          #+#    #+#             */
-/*   Updated: 2025/06/02 14:07:10 by mjoao-fr         ###   ########.fr       */
+/*   Updated: 2025/06/02 15:10:08 by mjoao-fr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	**fill_map(int fd)
 
 	i = 0;
 	j = 0;
-	while ((line = get_next_line(fd)) > 0)
+	while ((line = get_next_line(fd)))
 	{
 		temp = ft_recalloc(map, i, i + 1, sizeof(char *));
 		if (!temp)

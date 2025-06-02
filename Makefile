@@ -1,27 +1,30 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: mjoao-fr <mjoao-fr@student.42porto.com>    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2025/06/02 15:16:30 by mjoao-fr          #+#    #+#              #
+#    Updated: 2025/06/02 15:16:30 by mjoao-fr         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
 CC 			= cc
-CFLAGS		= -Wall -Wextra -Werror -I./Libft -g
-NAME		= so_long.a
-
-SRCS		= main.c
+CFLAGS		= -Wall -Wextra -Werror -g -I./libft-projects
+NAME		= so_long
+SRCS		= main.c validate_map.c
 OBJS		= $(SRCS:.c=.o)
 LIBFT_DIR 	= ./libft-projects
 LIBFT 		= ./libft-projects/complete_libft.a
 
 all: $(NAME) 
 
-$(NAME): $(LIBFT) $(PRINTF) $(OBJS)
-	@@echo "Compiling gnl..."
-#cp copies libft library to the final output
-	@cp $(LIBFT) $(NAME)
-	@ar rcs $(NAME) $(OBJS)
-#this tool creates and index for the static library
-	@ranlib $(NAME)
+$(NAME): $(LIBFT) $(OBJS)
+	@@echo "Compiling..."
+	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME)
 
-$(LIBFT): $(LIBFT_SRC)
-	@@echo "Compiling libft..."
-#libft depends on libft_dir: if libft is out of date, make will update it
-#this make refers to the libft makefile (-C tells make to change directory to libft_dir)
+$(LIBFT):
 	@$(MAKE) -C $(LIBFT_DIR) > /dev/null
 	
 %.o: %.c so_long.h
@@ -29,15 +32,14 @@ $(LIBFT): $(LIBFT_SRC)
 
 clean:
 	@@echo "Removing objects..."
-#/dev/null cleans commands from the output
 	@$(MAKE) clean -C $(LIBFT_DIR) > /dev/null
 	@rm -f $(OBJS) 
 
 fclean: clean
-	@@echo "Removing library..."
+	@@echo "Removing executable..."
 	@$(MAKE) fclean -C $(LIBFT_DIR) > /dev/null
 	@rm -f $(NAME)
 
-re: fclean $(NAME) all
+re: fclean all
 
 .PHONY: all clean fclean re
