@@ -13,7 +13,7 @@
 CC 			= cc
 CFLAGS		= -Wall -Wextra -Werror -g -I./libft-projects
 NAME		= so_long
-SRCS		= main.c validate_map.c
+SRCS		= main.c validate_map.c so_long_utils.c
 OBJS		= $(SRCS:.c=.o)
 LIBFT_DIR 	= ./libft-projects
 LIBFT 		= ./libft-projects/complete_libft.a

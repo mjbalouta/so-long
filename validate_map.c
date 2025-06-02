@@ -6,7 +6,7 @@
 /*   By: mjoao-fr <mjoao-fr@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 11:02:23 by mjoao-fr          #+#    #+#             */
-/*   Updated: 2025/06/02 15:25:13 by mjoao-fr         ###   ########.fr       */
+/*   Updated: 2025/06/02 18:39:20 by mjoao-fr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 int	*validate_chars(char *map, int *ex_st_col, int curr_size)
 {
 	int i;
-
+	
 	i = 0;
-	while (map[i])
+	while (map[i] != '\n' && map[i])
 	{
 		if (map[i] != '0' && map[i] != '1' && map[i] != 'C' && map[i] != 'E' && map[i] != 'P')
 			return (NULL);
@@ -29,6 +29,7 @@ int	*validate_chars(char *map, int *ex_st_col, int curr_size)
 			ex_st_col[1] += 1;
 		else if (map[i] == 'C')
 			ex_st_col[2] += 1;
+		i++;
 	}
 	return (ex_st_col);
 }
@@ -38,16 +39,16 @@ int	validate_first_last_line(char **map, int j)
 	int	i;
 
 	i = 0;
-	while (map[0][i])
+	while (map[0][i] && map[0][i] != '\n')
 	{
-		if (map[0][i] != 1)
+		if (map[0][i] != '1')
 			return (1);
 		i++;
 	}
 	i = 0;
-	while (map[j][i])
+	while (map[j][i] && map[j][i] != '\n')
 	{
-		if (map[j][i] != 1)
+		if (map[j][i] != '1')
 			return (1);
 		i++;
 	}
@@ -62,12 +63,14 @@ int validate_map(char **map)
 	int *ex_st_col;
 
 	j = 0;
+	prev_size = 0;
+	curr_size = 0;
 	ex_st_col = (int *)ft_calloc(3, sizeof(int));
 	if (!ex_st_col)
 		return (1);
-	while (*map[j])
+	while (map[j])
 	{
-		curr_size = ft_strlen(map[j]);
+		curr_size = line_len(map[j]);
 		if (prev_size != 0 && curr_size != prev_size)
 			return (1);
 		ex_st_col = validate_chars(map[j], ex_st_col, curr_size);
@@ -76,7 +79,7 @@ int validate_map(char **map)
 		prev_size = curr_size;
 		j++;
 	}
-	if (validate_first_last_line(map, j) != 0)
+	if (validate_first_last_line(map, j - 1) != 0)
 		return (1);
 	if (ex_st_col[0] != 1 || ex_st_col[1] != 1 || ex_st_col[2] < 1)
 		return (1);

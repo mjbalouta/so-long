@@ -1,26 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.h                                          :+:      :+:    :+:   */
+/*   so_long_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mjoao-fr <mjoao-fr@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/21 15:59:15 by mjoao-fr          #+#    #+#             */
-/*   Updated: 2025/06/02 18:16:57 by mjoao-fr         ###   ########.fr       */
+/*   Created: 2025/06/02 18:13:37 by mjoao-fr          #+#    #+#             */
+/*   Updated: 2025/06/02 18:16:00 by mjoao-fr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SO_LONG_H
-# define SO_LONG_H
+#include "so_long.h"
 
-#include "./libft-projects/get-next-line/get_next_line.h"
-#include "./libft-projects/libft/libft.h"
-#include "./libft-projects/printf/libftprintf.h"
+int	line_len(char *str)
+{
+	int	i;
 
-char	**fill_map(int fd);
-int		*validate_chars(char *map, int *ex_st_col, int curr_size);
-int		validate_first_last_line(char **map, int j);
-int		validate_map(char **map);
-int		line_len(char *str);
-
-#endif
+	i = 0;
+	while (str[i] && str[i] != '\n')
+		i++;
+	return (i);
+}
