@@ -6,7 +6,7 @@
 /*   By: mjoao-fr <mjoao-fr@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 15:59:40 by mjoao-fr          #+#    #+#             */
-/*   Updated: 2025/06/02 18:38:31 by mjoao-fr         ###   ########.fr       */
+/*   Updated: 2025/06/07 17:16:53 by mjoao-fr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int main(int ac, char **av)
 {
 	char	*ext;
 	int		fd;
-	char	**map;
+	t_game	game;
 
 	if (ac != 2)
 		return (write(2, "Error.\nMissing map.\n", 20));
@@ -56,8 +56,8 @@ int main(int ac, char **av)
 	fd = open(av[1], O_RDONLY);
 	if (fd == - 1)
 		return (write(2, "Error.\nCan't read map.\n", 23));
-	map = fill_map(fd);
-	if (!map)
-		return (free(map), write(2, "Error.\nInvalid map.\n", 20));
+	game.map.map = fill_map(fd);
+	if (!game.map.map)
+		return (free(game.map.map), write(2, "Error.\nInvalid map.\n", 20));
 	return (0);
 }

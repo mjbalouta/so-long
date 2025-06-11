@@ -6,13 +6,13 @@
 /*   By: mjoao-fr <mjoao-fr@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 11:02:23 by mjoao-fr          #+#    #+#             */
-/*   Updated: 2025/06/02 18:39:20 by mjoao-fr         ###   ########.fr       */
+/*   Updated: 2025/06/07 17:03:12 by mjoao-fr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	*validate_chars(char *map, int *ex_st_col, int curr_size)
+int	*validate_chars(char *map, int curr_size)
 {
 	int i;
 	
@@ -60,20 +60,16 @@ int validate_map(char **map)
 	int j;
 	int curr_size;
 	int prev_size;
-	int *ex_st_col;
 
 	j = 0;
 	prev_size = 0;
 	curr_size = 0;
-	ex_st_col = (int *)ft_calloc(3, sizeof(int));
-	if (!ex_st_col)
-		return (1);
 	while (map[j])
 	{
 		curr_size = line_len(map[j]);
 		if (prev_size != 0 && curr_size != prev_size)
 			return (1);
-		ex_st_col = validate_chars(map[j], ex_st_col, curr_size);
+		validate_chars(map[j], ex_st_col, curr_size);
 		if (!ex_st_col)
 			return (1);
 		prev_size = curr_size;
