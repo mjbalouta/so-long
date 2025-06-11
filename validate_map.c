@@ -6,7 +6,7 @@
 /*   By: mjoao-fr <mjoao-fr@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 11:02:23 by mjoao-fr          #+#    #+#             */
-/*   Updated: 2025/06/11 15:08:39 by mjoao-fr         ###   ########.fr       */
+/*   Updated: 2025/06/12 00:30:41 by mjoao-fr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,58 @@ int	validate_first_last_line(char **map, int j)
 	return (0);
 }
 
-int validate_map(t_map *map)
+void	fill(char **dup, t_point current, t_map *map, char to_avoid)
+{
+	if (current.x < 0 || current.y < 0 || current.x >= map->width || current.y >= map->height || dup[current.x][current.y] == to_avoid)
+		return ;
+	
+	dup[current.x][current.y] = '1';
+
+	fill(dup, (t_point){current.y, current.x - 1}, map, '1');
+	fill(dup, (t_point){current.y, current.x + 1}, map, '1');
+	fill(dup, (t_point){current.y - 1, current.x}, map, '1');
+	fill(dup, (t_point){current.y + 1, current.x}, map, '1');	
+}
+
+char	**flood_fill(t_map *map, t_player *player)
+{
+	char	**dup;
+	int		i;
+	int		j;
+	t_point	begin;
+	
+	dup = mapdup(map);
+	i = 0;
+	j = 0;
+	while (dup[j])
+	{
+		i = 0;
+		while (dup[j][i])
+		{
+			if (dup[j][i] == 'P')
+			{
+				player->x = i;
+				player->y = j;
+				begin.x = i;
+				begin.y = j;
+				fill(dup, begin, map, '1'); //seg fault (maybe pq height é 7 e devia ser 6)
+				break ;
+			}
+			i++;
+		}
+		j++;
+	}
+	j = 0;
+	while (dup[j])
+	{
+		ft_printf("%s\n", dup[j]);
+		j++;
+	}
+	return (dup);
+	//verificar se é possível apanhar todos os 'c' e chegar ao 'e'
+}
+
+int validate_map(t_map *map, t_player *player)
 {
 	int j;
 	int curr_size;
@@ -74,9 +125,11 @@ int validate_map(t_map *map)
 		prev_size = curr_size;
 		j++;
 	}
+	map->width = curr_size;
 	if (validate_first_last_line(map->map, j - 1) != 0)
 		return (1);
 	if (map->nr_exit != 1 || map->nr_start != 1 || map->nr_collect < 1)
 		return (1);
+	flood_fill(map, player);
 	return (0);
 }

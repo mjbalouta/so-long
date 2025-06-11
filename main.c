@@ -6,7 +6,7 @@
 /*   By: mjoao-fr <mjoao-fr@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 15:59:40 by mjoao-fr          #+#    #+#             */
-/*   Updated: 2025/06/11 19:25:51 by mjoao-fr         ###   ########.fr       */
+/*   Updated: 2025/06/11 23:10:39 by mjoao-fr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,15 @@ char	**fill_map(int fd, t_map *map, char *file)
 
 	j = 0;
 	line = get_next_line(fd);
+	if (!line)
+		return (NULL);
 	while (line)
 	{
 		free(line);
 		line = get_next_line(fd);
 		map->height++;
 	}
+	free(line);
 	map->map = ft_calloc(map->height + 1, sizeof(char *));
 	if (!map->map)
 		return (NULL);
@@ -40,9 +43,10 @@ char	**fill_map(int fd, t_map *map, char *file)
 
 int main(int ac, char **av)
 {
-	char	*ext;
-	int		fd;
-	t_map	*map;
+	char		*ext;
+	int			fd;
+	t_map		*map;
+	t_player	*player;
 
 	if (ac != 2)
 		return (write(2, "Error.\nMissing map.\n", 20));
@@ -53,8 +57,9 @@ int main(int ac, char **av)
 	if (fd == -1)
 		return (write(2, "Error.\nCan't read map.\n", 23));
 	map = ft_calloc(1, sizeof(t_map));
+	player = ft_calloc(1, sizeof(t_player));
 	map->map = fill_map(fd, map, av[1]);
-	if (!map->map || validate_map(map) != 0)
+	if (!map->map || validate_map(map, player) != 0)
 		return (free(map->map), write(2, "Error.\nInvalid map.\n", 20));
 	return (0);
 }
