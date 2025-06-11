@@ -6,37 +6,33 @@
 /*   By: mjoao-fr <mjoao-fr@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 15:59:40 by mjoao-fr          #+#    #+#             */
-/*   Updated: 2025/06/11 17:48:55 by mjoao-fr         ###   ########.fr       */
+/*   Updated: 2025/06/11 19:25:51 by mjoao-fr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-char	**fill_map(int fd, t_map *map)
+char	**fill_map(int fd, t_map *map, char *file)
 {
 	char	*line;
-	int		line_size;
 	int		j;
 
 	j = 0;
 	line = get_next_line(fd);
-	map->height++;
-	//ciclo para contar o nr de linhas do mapa
 	while (line)
 	{
 		free(line);
 		line = get_next_line(fd);
 		map->height++;
 	}
-	map->map = ft_calloc(j + 1, sizeof(char *));
+	map->map = ft_calloc(map->height + 1, sizeof(char *));
 	if (!map->map)
 		return (NULL);
-	//ciclo para copiar do ficheiro para o mapa
-	while (j < (map->height - 1))
+	close(fd);
+	fd = open(file, O_RDONLY);
+	while (j < map->height)
 	{
 		map->map[j] = get_next_line(fd);
-		line_size = ft_strlen(map->map[j]);
-		ft_strlcpy(map->map[j], line, line_size + 1);
 		j++;
 	}
 	return (map->map);
@@ -57,7 +53,7 @@ int main(int ac, char **av)
 	if (fd == -1)
 		return (write(2, "Error.\nCan't read map.\n", 23));
 	map = ft_calloc(1, sizeof(t_map));
-	map->map = fill_map(fd, map);
+	map->map = fill_map(fd, map, av[1]);
 	if (!map->map || validate_map(map) != 0)
 		return (free(map->map), write(2, "Error.\nInvalid map.\n", 20));
 	return (0);
