@@ -6,7 +6,7 @@
 /*   By: mjoao-fr <mjoao-fr@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 15:59:15 by mjoao-fr          #+#    #+#             */
-/*   Updated: 2025/06/07 17:16:23 by mjoao-fr         ###   ########.fr       */
+/*   Updated: 2025/06/11 17:07:17 by mjoao-fr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,10 @@ typedef struct    s_map
 	int		height;
 }                 t_map;
 
-typedef struct    s_game
-{
-	t_map	map;
-}                 t_game;
-
-char	**fill_map(int fd);
-int		*validate_chars(char *map, int *ex_st_col, int curr_size);
+char	**fill_map(int fd, t_map *map);
+int		validate_chars(char *str, int curr_size, t_map *map);
 int		validate_first_last_line(char **map, int j);
-int		validate_map(char **map);
+int		validate_map(t_map *map);
 int		line_len(char *str);
 
 #endif

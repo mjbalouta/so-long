@@ -6,32 +6,32 @@
 /*   By: mjoao-fr <mjoao-fr@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 11:02:23 by mjoao-fr          #+#    #+#             */
-/*   Updated: 2025/06/07 17:03:12 by mjoao-fr         ###   ########.fr       */
+/*   Updated: 2025/06/11 15:08:39 by mjoao-fr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	*validate_chars(char *map, int curr_size)
+int	validate_chars(char *str, int curr_size, t_map *map)
 {
 	int i;
 	
 	i = 0;
-	while (map[i] != '\n' && map[i])
+	while (str[i] != '\n' && str[i])
 	{
-		if (map[i] != '0' && map[i] != '1' && map[i] != 'C' && map[i] != 'E' && map[i] != 'P')
-			return (NULL);
-		if ((i == 0 || i == (curr_size - 1)) && map[i] != '1')
-			return (NULL);
-		if (map[i] == 'E')
-			ex_st_col[0] += 1;
-		else if (map[i] == 'P')
-			ex_st_col[1] += 1;
-		else if (map[i] == 'C')
-			ex_st_col[2] += 1;
+		if (str[i] != '0' && str[i] != '1' && str[i] != 'C' && str[i] != 'E' && str[i] != 'P')
+			return (1);
+		if ((i == 0 || i == (curr_size - 1)) && str[i] != '1')
+			return (1);
+		if (str[i] == 'E')
+			map->nr_exit++;
+		else if (str[i] == 'P')
+			map->nr_start++;
+		else if (str[i] == 'C')
+			map->nr_collect++;
 		i++;
 	}
-	return (ex_st_col);
+	return (0);
 }
 
 int	validate_first_last_line(char **map, int j)
@@ -55,7 +55,7 @@ int	validate_first_last_line(char **map, int j)
 	return (0);
 }
 
-int validate_map(char **map)
+int validate_map(t_map *map)
 {
 	int j;
 	int curr_size;
@@ -64,20 +64,19 @@ int validate_map(char **map)
 	j = 0;
 	prev_size = 0;
 	curr_size = 0;
-	while (map[j])
+	while (map->map[j])
 	{
-		curr_size = line_len(map[j]);
+		curr_size = line_len(map->map[j]);
 		if (prev_size != 0 && curr_size != prev_size)
 			return (1);
-		validate_chars(map[j], ex_st_col, curr_size);
-		if (!ex_st_col)
+		if (validate_chars(map->map[j], curr_size, map) == 1)
 			return (1);
 		prev_size = curr_size;
 		j++;
 	}
-	if (validate_first_last_line(map, j - 1) != 0)
+	if (validate_first_last_line(map->map, j - 1) != 0)
 		return (1);
-	if (ex_st_col[0] != 1 || ex_st_col[1] != 1 || ex_st_col[2] < 1)
+	if (map->nr_exit != 1 || map->nr_start != 1 || map->nr_collect < 1)
 		return (1);
 	return (0);
 }

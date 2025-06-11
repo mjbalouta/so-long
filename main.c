@@ -6,47 +6,47 @@
 /*   By: mjoao-fr <mjoao-fr@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 15:59:40 by mjoao-fr          #+#    #+#             */
-/*   Updated: 2025/06/07 17:16:53 by mjoao-fr         ###   ########.fr       */
+/*   Updated: 2025/06/11 17:48:55 by mjoao-fr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-char	**fill_map(int fd)
+char	**fill_map(int fd, t_map *map)
 {
 	char	*line;
 	int		line_size;
-	char 	**map;
 	int		j;
-	char	**temp;
 
 	j = 0;
-	map = ft_calloc(1, sizeof(char *));
-	if (!map)
-		return (NULL);
-	while ((line = get_next_line(fd)))
+	line = get_next_line(fd);
+	map->height++;
+	//ciclo para contar o nr de linhas do mapa
+	while (line)
 	{
-		temp = ft_recalloc(map, j * sizeof(char *), j + 2, sizeof(char *));
-		if (!temp)
-			return (free(map), NULL);
-		map = temp;
-		line_size = ft_strlen(line);
-		map[j] = ft_calloc(line_size + 1, sizeof(char));
-		if (!map[j])
-			return(NULL);
-		ft_strlcpy(map[j], line, line_size + 1);
+		free(line);
+		line = get_next_line(fd);
+		map->height++;
+	}
+	map->map = ft_calloc(j + 1, sizeof(char *));
+	if (!map->map)
+		return (NULL);
+	//ciclo para copiar do ficheiro para o mapa
+	while (j < (map->height - 1))
+	{
+		map->map[j] = get_next_line(fd);
+		line_size = ft_strlen(map->map[j]);
+		ft_strlcpy(map->map[j], line, line_size + 1);
 		j++;
 	}
-	if (validate_map(map) != 0)
-		return (NULL);
-	return (map);
+	return (map->map);
 }
 
 int main(int ac, char **av)
 {
 	char	*ext;
 	int		fd;
-	t_game	game;
+	t_map	*map;
 
 	if (ac != 2)
 		return (write(2, "Error.\nMissing map.\n", 20));
@@ -54,10 +54,11 @@ int main(int ac, char **av)
 	if (ext[1] != 'b' || ext[2] != 'e' || ext[3] != 'r' || ext[4])
 		return (write(2, "Error.\nWrong file. Must be .ber.\n", 33));
 	fd = open(av[1], O_RDONLY);
-	if (fd == - 1)
+	if (fd == -1)
 		return (write(2, "Error.\nCan't read map.\n", 23));
-	game.map.map = fill_map(fd);
-	if (!game.map.map)
-		return (free(game.map.map), write(2, "Error.\nInvalid map.\n", 20));
+	map = ft_calloc(1, sizeof(t_map));
+	map->map = fill_map(fd, map);
+	if (!map->map || validate_map(map) != 0)
+		return (free(map->map), write(2, "Error.\nInvalid map.\n", 20));
 	return (0);
 }
