@@ -6,7 +6,7 @@
 /*   By: mjoao-fr <mjoao-fr@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 11:02:23 by mjoao-fr          #+#    #+#             */
-/*   Updated: 2025/06/12 12:30:56 by mjoao-fr         ###   ########.fr       */
+/*   Updated: 2025/06/12 14:56:01 by mjoao-fr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,4 +82,13 @@ int validate_map(t_map *map, t_player *player)
 	if (validate_path(map, player) == 1)
 		return (1);
 	return (0);
+}
+
+void	check_extension(char *str)
+{
+	char		*ext;
+	
+	ext = ft_strrchr(str, '.');
+	if (ext[1] != 'b' || ext[2] != 'e' || ext[3] != 'r' || ext[4])
+		write(2, "Error.\nWrong file. Must be .ber.\n", 33);
 }

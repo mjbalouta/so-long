@@ -6,7 +6,7 @@
 /*   By: mjoao-fr <mjoao-fr@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 15:59:15 by mjoao-fr          #+#    #+#             */
-/*   Updated: 2025/06/12 12:23:32 by mjoao-fr         ###   ########.fr       */
+/*   Updated: 2025/06/12 15:23:24 by mjoao-fr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include "./libft-projects/get-next-line/get_next_line.h"
 #include "./libft-projects/libft/libft.h"
 #include "./libft-projects/printf/libftprintf.h"
+#include "./minilibx-linux/mlx.h"
 
 typedef struct    s_map
 {
@@ -47,6 +48,7 @@ void	fill(char **dup, t_point current, t_map *map, char to_avoid);
 char	**flood_fill(t_map *map, t_player *player);
 int		validate_path(t_map *map, t_player *player);
 int		validate_map(t_map *map, t_player *player);
+void	check_extension(char *str);
 int		line_len(char *str);
 char	**mapdup(t_map *map);
 

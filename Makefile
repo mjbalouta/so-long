@@ -18,11 +18,12 @@ OBJS		= $(SRCS:.c=.o)
 LIBFT_DIR 	= ./libft-projects
 LIBFT 		= ./libft-projects/complete_libft.a
 
+
 all: $(NAME) 
 
 $(NAME): $(LIBFT) $(OBJS)
 	@@echo "Compiling..."
-	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME)
+	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT) libmlx.a -lXext -lX11 -lm -lGL -o $(NAME)
 
 $(LIBFT):
 	@$(MAKE) -C $(LIBFT_DIR) > /dev/null

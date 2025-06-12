@@ -6,7 +6,7 @@
 /*   By: mjoao-fr <mjoao-fr@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 15:59:40 by mjoao-fr          #+#    #+#             */
-/*   Updated: 2025/06/12 12:22:52 by mjoao-fr         ###   ########.fr       */
+/*   Updated: 2025/06/12 15:46:18 by mjoao-fr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,16 +40,15 @@ char	**fill_map(int fd, t_map *map, char *file)
 
 int main(int ac, char **av)
 {
-	char		*ext;
 	int			fd;
 	t_map		*map;
 	t_player	*player;
+	// void		*mlx_connection;
+	// void		*mlx_window;
 
 	if (ac != 2)
 		return (write(2, "Error.\nMissing map.\n", 20));
-	ext = ft_strrchr(av[1], '.');
-	if (ext[1] != 'b' || ext[2] != 'e' || ext[3] != 'r' || ext[4])
-		return (write(2, "Error.\nWrong file. Must be .ber.\n", 33));
+	check_extension(av[1]);
 	fd = open(av[1], O_RDONLY);
 	if (fd == -1)
 		return (write(2, "Error.\nCan't read map.\n", 23));
@@ -58,5 +57,10 @@ int main(int ac, char **av)
 	map->map = fill_map(fd, map, av[1]);
 	if (!map->map || validate_map(map, player) != 0)
 		return (free(map->map), write(2, "Error.\nInvalid map.\n", 20));
+	// mlx_connection = mlx_init();
+	// mlx_window = mlx_new_window(mlx_connection, 500, 500, "so_long");
+	// mlx_loop(mlx_connection);
+	free(map);
+	free(player);
 	return (0);
 }
