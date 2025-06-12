@@ -6,7 +6,7 @@
 /*   By: mjoao-fr <mjoao-fr@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 15:59:40 by mjoao-fr          #+#    #+#             */
-/*   Updated: 2025/06/12 15:46:18 by mjoao-fr         ###   ########.fr       */
+/*   Updated: 2025/06/12 22:44:34 by mjoao-fr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ char	**fill_map(int fd, t_map *map, char *file)
 	fd = open(file, O_RDONLY);
 	while (j < map->height)
 		map->map[j++] = get_next_line(fd);
+	close(fd);
 	return (map->map);
 }
 
