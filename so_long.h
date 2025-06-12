@@ -6,7 +6,7 @@
 /*   By: mjoao-fr <mjoao-fr@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 15:59:15 by mjoao-fr          #+#    #+#             */
-/*   Updated: 2025/06/12 15:23:24 by mjoao-fr         ###   ########.fr       */
+/*   Updated: 2025/06/12 22:57:51 by mjoao-fr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,6 @@ int		validate_map(t_map *map, t_player *player);
 void	check_extension(char *str);
 int		line_len(char *str);
 char	**mapdup(t_map *map);
+void	free_map(char **map, int height);
 
 #endif

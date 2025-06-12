@@ -6,7 +6,7 @@
 /*   By: mjoao-fr <mjoao-fr@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 18:13:37 by mjoao-fr          #+#    #+#             */
-/*   Updated: 2025/06/11 20:06:12 by mjoao-fr         ###   ########.fr       */
+/*   Updated: 2025/06/12 23:02:06 by mjoao-fr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ char	**mapdup(t_map *map)
 	char	**dup;
 	int		i;
 
-	dup = ft_calloc(map->height + 1, sizeof(t_map));
+	dup = ft_calloc(map->height + 1, sizeof(char *));
 	if (!dup)
 		return (NULL);
 	i = 0;
@@ -40,4 +40,19 @@ char	**mapdup(t_map *map)
 		i++;
 	}
 	return (dup);
+}
+
+void	free_map(char **map, int height)
+{
+	int	i;
+
+	i = 0;
+	if (!map)
+		return ;
+	while (i < height)
+	{
+		free(map[i]);
+		i++;
+	}
+	free(map);
 }

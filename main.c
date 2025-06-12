@@ -6,7 +6,7 @@
 /*   By: mjoao-fr <mjoao-fr@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 15:59:40 by mjoao-fr          #+#    #+#             */
-/*   Updated: 2025/06/12 22:44:34 by mjoao-fr         ###   ########.fr       */
+/*   Updated: 2025/06/12 22:58:25 by mjoao-fr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ int main(int ac, char **av)
 	// mlx_connection = mlx_init();
 	// mlx_window = mlx_new_window(mlx_connection, 500, 500, "so_long");
 	// mlx_loop(mlx_connection);
+	free_map(map->map, map->height);
 	free(map);
 	free(player);
 	return (0);
