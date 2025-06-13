@@ -10,34 +10,33 @@
 #                                                                              #
 # **************************************************************************** #
 
-CC 			= cc
-CFLAGS		= -Wall -Wextra -Werror -g -I./libft-projects
-NAME		= so_long
-SRCS		= main.c validate_map.c so_long_utils.c check_path.c
-OBJS		= $(SRCS:.c=.o)
-LIBFT_DIR 	= ./libft-projects
-LIBFT 		= ./libft-projects/complete_libft.a
+CC          = cc
+CFLAGS      = -Wall -Wextra -Werror -g -I$(LIBFT_DIR)
+NAME        = so_long
+SRCS        = main.c validate_map.c so_long_utils.c check_path.c
+OBJS        = $(SRCS:.c=.o)
+LIBFT_DIR   = ./libft-projects
+LIBFT       = $(LIBFT_DIR)/complete_libft.a
 
-
-all: $(NAME) 
+all: $(NAME)
 
 $(NAME): $(LIBFT) $(OBJS)
-	@@echo "Compiling..."
-	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT) libmlx.a -lXext -lX11 -lm -lGL -o $(NAME)
+	@echo "Compiling..."
+	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT) minilibx-linux/libmlx_Linux.a -lXext -lX11 -lm -lz -o $(NAME)
 
 $(LIBFT):
 	@$(MAKE) -C $(LIBFT_DIR) > /dev/null
-	
+
 %.o: %.c so_long.h
-	@$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -I/usr/include -O3 -c $< -o $@
 
 clean:
-	@@echo "Removing objects..."
+	@echo "Removing objects..."
 	@$(MAKE) clean -C $(LIBFT_DIR) > /dev/null
-	@rm -f $(OBJS) 
+	@rm -f $(OBJS)
 
 fclean: clean
-	@@echo "Removing executable..."
+	@echo "Removing executable..."
 	@$(MAKE) fclean -C $(LIBFT_DIR) > /dev/null
 	@rm -f $(NAME)
 

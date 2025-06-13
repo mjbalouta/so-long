@@ -6,7 +6,7 @@
 /*   By: mjoao-fr <mjoao-fr@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 15:59:40 by mjoao-fr          #+#    #+#             */
-/*   Updated: 2025/06/13 13:33:30 by mjoao-fr         ###   ########.fr       */
+/*   Updated: 2025/06/13 14:53:58 by mjoao-fr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,7 @@ int main(int ac, char **av)
 	int			fd;
 	t_map		map;
 	t_player	player;
-	void		*mlx_connection;
-	void		*mlx_window;
+	t_window	window;
 
 	if (ac != 2)
 		return (write(2, "Error.\nMissing map.\n", 20));
@@ -60,9 +59,10 @@ int main(int ac, char **av)
 	map.map = fill_map(fd, &map, av[1]);
 	if (!map.map || validate_map(&map, &player) == 1)
 		return (free_map(map.map, map.height), write(2, "Error.\nInvalid map.\n", 20));
-	mlx_connection = mlx_init();
-	mlx_window = mlx_new_window(mlx_connection, 500, 500, "so_long");
-	mlx_loop(mlx_connection);
+	window.mlx_connection = mlx_init();
+	window.mlx_window = mlx_new_window(window.mlx_connection, 1920, 1080, "so_long");
+	window.img = mlx_new_image(window.mlx_connection, 1920, 1080);
+	mlx_loop(window.mlx_connection);
 	free_map(map.map, map.height);
 	return (0);
 }
