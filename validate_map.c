@@ -6,7 +6,7 @@
 /*   By: mjoao-fr <mjoao-fr@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 11:02:23 by mjoao-fr          #+#    #+#             */
-/*   Updated: 2025/06/12 14:56:01 by mjoao-fr         ###   ########.fr       */
+/*   Updated: 2025/06/13 13:30:53 by mjoao-fr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,11 +75,9 @@ int validate_map(t_map *map, t_player *player)
 		j++;
 	}
 	map->width = curr_size;
-	if (validate_first_last_line(map->map, j - 1) != 0)
-		return (1);
 	if (map->nr_exit != 1 || map->nr_start != 1 || map->nr_collect < 1)
 		return (1);
-	if (validate_path(map, player) == 1)
+	if ((validate_first_last_line(map->map, j - 1) != 0) || (validate_path(map, player) == 1))
 		return (1);
 	return (0);
 }

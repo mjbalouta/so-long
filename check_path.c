@@ -6,7 +6,7 @@
 /*   By: mjoao-fr <mjoao-fr@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 12:06:25 by mjoao-fr          #+#    #+#             */
-/*   Updated: 2025/06/12 22:55:48 by mjoao-fr         ###   ########.fr       */
+/*   Updated: 2025/06/13 13:31:36 by mjoao-fr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int	validate_path(t_map *map, t_player *player)
 		while (dup[j][i])
 		{
 			if (dup[j][i] == 'C' || dup[j][i] == 'E')
-				return (1);
+				return (free_map(dup, map->height), 1);
 			i++;
 		}
 		j++;

@@ -6,7 +6,7 @@
 /*   By: mjoao-fr <mjoao-fr@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 18:13:37 by mjoao-fr          #+#    #+#             */
-/*   Updated: 2025/06/12 23:02:06 by mjoao-fr         ###   ########.fr       */
+/*   Updated: 2025/06/13 13:30:48 by mjoao-fr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ void	free_map(char **map, int height)
 	while (i < height)
 	{
 		free(map[i]);
+		map[i] = NULL;
 		i++;
 	}
 	free(map);
