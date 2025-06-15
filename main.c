@@ -6,7 +6,7 @@
 /*   By: mjoao-fr <mjoao-fr@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 15:59:40 by mjoao-fr          #+#    #+#             */
-/*   Updated: 2025/06/13 14:53:58 by mjoao-fr         ###   ########.fr       */
+/*   Updated: 2025/06/15 22:19:41 by mjoao-fr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,8 @@ int main(int ac, char **av)
 
 	if (ac != 2)
 		return (write(2, "Error.\nMissing map.\n", 20));
-	check_extension(av[1]);
+	if (check_extension(av[1]) == 1)
+		return(write(2, "Error.\nWrong file. Must be .ber.\n", 33));
 	fd = open(av[1], O_RDONLY);
 	if (fd == -1)
 		return (write(2, "Error.\nCan't read map.\n", 23));
