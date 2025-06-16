@@ -6,7 +6,7 @@
 /*   By: mjoao-fr <mjoao-fr@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 15:59:15 by mjoao-fr          #+#    #+#             */
-/*   Updated: 2025/06/15 22:18:52 by mjoao-fr         ###   ########.fr       */
+/*   Updated: 2025/06/16 14:45:39 by mjoao-fr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ typedef	struct s_window
 	void	*img;
 }				t_window;
 
-
 char	**fill_map(int fd, t_map *map, char *file);
 int		validate_chars(char *str, int curr_size, t_map *map);
 int		validate_first_last_line(char **map, int j);
@@ -60,5 +59,6 @@ int		check_extension(char *str);
 int		line_len(char *str);
 char	**mapdup(t_map *map);
 void	free_map(char **map, int height);
+void	render_window(void);
 
 #endif
