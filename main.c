@@ -6,7 +6,7 @@
 /*   By: mjoao-fr <mjoao-fr@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 15:59:40 by mjoao-fr          #+#    #+#             */
-/*   Updated: 2025/06/16 14:30:24 by mjoao-fr         ###   ########.fr       */
+/*   Updated: 2025/06/16 20:01:38 by mjoao-fr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int main(int ac, char **av)
 	map.map = fill_map(fd, &map, av[1]);
 	if (!map.map || validate_map(&map, &player) == 1)
 		return (free_map(map.map, map.height), write(2, "Error.\nInvalid map.\n", 20));
-	render_window();
+	render_window(&map);
 	free_map(map.map, map.height);
 	return (0);
 }

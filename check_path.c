@@ -6,7 +6,7 @@
 /*   By: mjoao-fr <mjoao-fr@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 12:06:25 by mjoao-fr          #+#    #+#             */
-/*   Updated: 2025/06/13 13:31:36 by mjoao-fr         ###   ########.fr       */
+/*   Updated: 2025/06/16 22:57:03 by mjoao-fr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 void	fill(char **dup, t_point current, t_map *map, char to_avoid)
 {
-	if ((current.x < 0 || current.y < 0 || current.x >= map->width || current.y >= map->height) || dup[current.x][current.y] == to_avoid)
+	if ((current.x < 0 || current.y < 0 || current.x >= map->width || current.y >= map->height) || dup[current.y][current.x] == to_avoid)
 		return ;
 	
-	dup[current.x][current.y] = '1';
+	dup[current.y][current.x] = '1';
 	fill(dup, (t_point){current.x, current.y - 1}, map, '1');
 	fill(dup, (t_point){current.x, current.y + 1}, map, '1');
 	fill(dup, (t_point){current.x - 1, current.y}, map, '1');
