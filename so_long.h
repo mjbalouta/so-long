@@ -6,7 +6,7 @@
 /*   By: mjoao-fr <mjoao-fr@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 15:59:15 by mjoao-fr          #+#    #+#             */
-/*   Updated: 2025/06/17 22:25:29 by mjoao-fr         ###   ########.fr       */
+/*   Updated: 2025/06/17 22:55:35 by mjoao-fr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,24 +55,7 @@ typedef struct s_tile
 	void	*water_tile;
 	void	*squirrel_tile;
 	void	*bolota_tile;
-	void	*exit_tile;
-	// void	*right_tile01;
-	// void	*right_tile02;
-	// void	*right_tile03;
-	// void	*right_tile04;
-	// void	*left_tile01;
-	// void	*left_tile02;
-	// void	*left_tile03;
-	// void	*left_tile04;
-	// void	*top_left_corner;
-	// void	*top;
-	// void	*top_right_corner;
-	// void	*right;
-	// void	*bottom_right_corner;
-	// void	*bottom;
-	// void	*bottom_left_corner;
-	// void	*left;
-	
+	void	*exit_tile;	
 }				t_tile;
 
 char	**fill_map(int fd, t_map *map, char *file);
@@ -89,5 +72,6 @@ void	free_map(char **map, int height);
 void	fill_window_map(t_window *window, t_map *map);
 void	render_window(t_map *map);
 void	create_img(t_tile *img, t_window *window);
+void	detect_pressed_key(t_window *window, t_map *map);
 
 #endif
