@@ -13,7 +13,7 @@
 CC          = cc
 CFLAGS      = -Wall -Wextra -Werror -g -I$(LIBFT_DIR)
 NAME        = so_long
-SRCS        = main.c validate_map.c so_long_utils.c check_path.c render_window.c
+SRCS        = main.c validate_map.c so_long_utils.c check_path.c render_window.c move_player.c
 OBJS        = $(SRCS:.c=.o)
 LIBFT_DIR   = ./libft-projects
 LIBFT       = $(LIBFT_DIR)/complete_libft.a

@@ -6,7 +6,7 @@
 /*   By: mjoao-fr <mjoao-fr@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 12:06:25 by mjoao-fr          #+#    #+#             */
-/*   Updated: 2025/06/16 22:57:03 by mjoao-fr         ###   ########.fr       */
+/*   Updated: 2025/06/21 13:02:38 by mjoao-fr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ char	**flood_fill(t_map *map, t_player *player)
 	}
 	return (dup);
 }
+
 int	validate_path(t_map *map, t_player *player)
 {
 	char	**dup;

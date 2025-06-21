@@ -6,7 +6,7 @@
 /*   By: mjoao-fr <mjoao-fr@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 15:59:15 by mjoao-fr          #+#    #+#             */
-/*   Updated: 2025/06/17 22:55:35 by mjoao-fr         ###   ########.fr       */
+/*   Updated: 2025/06/21 13:10:03 by mjoao-fr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,18 +35,6 @@ typedef struct s_player
 	int collected;
 }					t_player;
 
-typedef struct s_point
-{
-	int x;
-	int y;
-}				t_point;
-
-typedef	struct s_window
-{
-	void	*mlx_connection;
-	void	*mlx_window;
-}				t_window;
-
 typedef struct s_tile
 {
 	int		img_width;
@@ -57,6 +45,20 @@ typedef struct s_tile
 	void	*bolota_tile;
 	void	*exit_tile;	
 }				t_tile;
+
+typedef	struct s_game
+{
+	void		*mlx_connection;
+	void		*mlx_window;
+	t_player	*player;
+	t_map		*map;
+}				t_game;
+
+typedef struct s_point
+{
+	int x;
+	int y;
+}				t_point;
 
 char	**fill_map(int fd, t_map *map, char *file);
 int		validate_chars(char *str, int curr_size, t_map *map);
@@ -69,9 +71,11 @@ int		check_extension(char *str);
 int		line_len(char *str);
 char	**mapdup(t_map *map);
 void	free_map(char **map, int height);
-void	fill_window_map(t_window *window, t_map *map);
-void	render_window(t_map *map);
-void	create_img(t_tile *img, t_window *window);
-void	detect_pressed_key(t_window *window, t_map *map);
+void	free_game(t_game *game);
+void	fill_window_map(t_game *game);
+void	render_window(t_game *game);
+void	create_img(t_tile *img, t_game *game);
+int		handle_pressed_key(int keysym, t_game *game);
+void	move_player(t_game *game, int x, int y);
 
 #endif
