@@ -6,7 +6,7 @@
 /*   By: mjoao-fr <mjoao-fr@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 18:13:37 by mjoao-fr          #+#    #+#             */
-/*   Updated: 2025/06/21 12:52:37 by mjoao-fr         ###   ########.fr       */
+/*   Updated: 2025/06/21 16:34:56 by mjoao-fr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,21 @@ void	free_map(char **map, int height)
 	}
 	free(map);
 }
+void	free_images(t_game *game)
+{
+	if (game->img->tile)
+		mlx_destroy_image(game->mlx_connection, game->img->tile);
+	if (game->img->water_tile)
+		mlx_destroy_image(game->mlx_connection, game->img->water_tile);
+	if (game->img->squirrel_tile)
+		mlx_destroy_image(game->mlx_connection, game->img->squirrel_tile);
+	if (game->img->bolota_tile)
+		mlx_destroy_image(game->mlx_connection, game->img->bolota_tile);
+	if (game->img->exit_tile)
+	mlx_destroy_image(game->mlx_connection, game->img->exit_tile);
+}
 
-void	free_game(t_game *game)
+int	free_game(t_game *game)
 {
 	if (game->map)
 	{
@@ -68,4 +81,18 @@ void	free_game(t_game *game)
 	}
 	if (game->player)
 		free(game->player);
+	free_images(game);
+	if (game->img)
+		free(game->img);
+	if (game->mlx_window)
+	{
+		mlx_clear_window(game->mlx_connection, game->mlx_window);
+		mlx_destroy_window(game->mlx_connection, game->mlx_window);
+	}
+	if (game->mlx_connection)
+	{
+		mlx_destroy_display(game->mlx_connection);
+		free(game->mlx_connection);
+	}
+	return (0);
 }

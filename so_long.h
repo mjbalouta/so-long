@@ -6,12 +6,26 @@
 /*   By: mjoao-fr <mjoao-fr@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 15:59:15 by mjoao-fr          #+#    #+#             */
-/*   Updated: 2025/06/21 13:10:03 by mjoao-fr         ###   ########.fr       */
+/*   Updated: 2025/06/21 16:52:07 by mjoao-fr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
+
+#define TILE_SIZE 96
+#define KEY_LEFT  65361
+#define KEY_UP    65362
+#define KEY_RIGHT 65363
+#define KEY_DOWN  65364
+#define KEY_ESC   65307
+
+//\033[<STYLE>;<TEXT_COLOR>;<BACKGROUND_COLOR>m
+#define RED "\033[1;31m"
+#define CYAN "\033[1;36m"
+#define GREEN "\033[1;32m"
+#define DEFAULT "\033[0m"
+#define	YELLOW "\033[38;5;178m"
 
 #include "./libft-projects/get-next-line/get_next_line.h"
 #include "./libft-projects/libft/libft.h"
@@ -52,6 +66,8 @@ typedef	struct s_game
 	void		*mlx_window;
 	t_player	*player;
 	t_map		*map;
+	t_tile		*img;
+	int			moves;
 }				t_game;
 
 typedef struct s_point
@@ -71,11 +87,14 @@ int		check_extension(char *str);
 int		line_len(char *str);
 char	**mapdup(t_map *map);
 void	free_map(char **map, int height);
-void	free_game(t_game *game);
+int		free_game(t_game *game);
 void	fill_window_map(t_game *game);
 void	render_window(t_game *game);
-void	create_img(t_tile *img, t_game *game);
+void	create_img(t_game *game);
 int		handle_pressed_key(int keysym, t_game *game);
 void	move_player(t_game *game, int x, int y);
+void	check_moves(t_game *game, int x, int y);
+void	free_images(t_game *game);
+int		init_structs(t_game *game);
 
 #endif

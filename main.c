@@ -6,7 +6,7 @@
 /*   By: mjoao-fr <mjoao-fr@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 15:59:40 by mjoao-fr          #+#    #+#             */
-/*   Updated: 2025/06/21 13:05:06 by mjoao-fr         ###   ########.fr       */
+/*   Updated: 2025/06/21 16:44:43 by mjoao-fr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,30 +41,41 @@ char	**fill_map(int fd, t_map *map, char *file)
 	return (map->map);
 }
 
+int	init_structs(t_game *game)
+{
+	ft_memset(game, 0, sizeof(t_game));
+	game->map = malloc(sizeof(t_map));
+	if (!game->map)
+		return (1);
+	ft_memset(game->map, 0, sizeof(t_map));
+	game->player = malloc(sizeof(t_player));
+	if (!game->player)
+		return (1);
+	ft_memset(game->player, 0, sizeof(t_player));
+	game->img = malloc(sizeof(t_tile));
+	if (!game->img)
+		return (1);
+	ft_memset(game->img, 0, sizeof(t_tile));
+	return (0);
+}
+
 int main(int ac, char **av)
 {
 	int			fd;
 	t_game		game;
 
 	if (ac != 2)
-		return (write(2, "Error.\nMissing map.\n", 20));
+		return (ft_printf("%sError.\nMissing map.%s\n", RED, DEFAULT));
 	if (check_extension(av[1]) == 1)
-		return(write(2, "Error.\nWrong file. Must be .ber.\n", 33));
+		return(ft_printf("%sError.\nMust be .ber.%s\n", RED, DEFAULT));
 	fd = open(av[1], O_RDONLY);
 	if (fd == -1)
-		return (write(2, "Error.\nCan't read map.\n", 23));
-	ft_memset(&game, 0, sizeof(t_game));
-	game.map = malloc(sizeof(t_map));
-	if (!game.map)
-		return (write(2, "Error.\nCan't allocate memory.\n", 30));
-	ft_memset(game.map, 0, sizeof(t_map));
-	game.player = malloc(sizeof(t_player));
-	if (!game.player)
-		return (write(2, "Error.\nCan't allocate memory.\n", 30));
-	ft_memset(game.player, 0, sizeof(t_player));
+		return (ft_printf("%sError.\nCan't read map.%s\n", RED, DEFAULT));
+	if (init_structs(&game) != 0)
+		return (ft_printf("%sError.\nCan't allocate memory.%s\n", RED, DEFAULT));
 	game.map->map = fill_map(fd, game.map, av[1]);
 	if (!game.map->map || validate_map(game.map, game.player) == 1)
-		return (free_game(&game), write(2, "Error.\nInvalid map.\n", 20));
+		return (free_game(&game), ft_printf("%sError.\nInvalid Map.%s\n", RED, DEFAULT));
 	render_window(&game);
 	free_game(&game);
 	return (0);
