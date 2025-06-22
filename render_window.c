@@ -6,7 +6,7 @@
 /*   By: mjoao-fr <mjoao-fr@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 14:30:26 by mjoao-fr          #+#    #+#             */
-/*   Updated: 2025/06/22 01:25:23 by mjoao-fr         ###   ########.fr       */
+/*   Updated: 2025/06/22 01:53:11 by mjoao-fr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,50 @@
 
 int	create_img(t_game	*game)
 {
-	game->img->water_tile = mlx_xpm_file_to_image(game->mlx_connection, "./textures/water-tile-96.xpm", &game->img->img_width, &game->img->img_height);
-	if (!game->img->water_tile)
+	game->img->water = mlx_xpm_file_to_image(game->mlx_connection, "./textures/"
+			"water.xpm", &game->img->img_width, &game->img->img_height);
+	if (!game->img->water)
 		return (1);
-	game->img->tile = mlx_xpm_file_to_image(game->mlx_connection, "./textures/new-tile-standard.xpm", &game->img->img_width, &game->img->img_height);
+	game->img->tile = mlx_xpm_file_to_image(game->mlx_connection,
+			"./textures/tile.xpm",
+			&game->img->img_width, &game->img->img_height);
 	if (!game->img->tile)
 		return (1);
-	game->img->squirrel_tile = mlx_xpm_file_to_image(game->mlx_connection, "./textures/squirrel-tile.xpm", &game->img->img_width, &game->img->img_height);
-	if (!game->img->squirrel_tile)
+	game->img->squirrel = mlx_xpm_file_to_image(game->mlx_connection,
+			"./textures/squirrel.xpm", &game->img->img_width,
+			&game->img->img_height);
+	if (!game->img->squirrel)
 		return (1);
-	game->img->bolota_tile = mlx_xpm_file_to_image(game->mlx_connection, "./textures/bolota-tile.xpm", &game->img->img_width, &game->img->img_height);
-	if (!game->img->bolota_tile)
+	game->img->bolota = mlx_xpm_file_to_image(game->mlx_connection,
+			"./textures/bolota.xpm", &game->img->img_width,
+			&game->img->img_height);
+	if (!game->img->bolota)
 		return (1);
-	game->img->exit_tile = mlx_xpm_file_to_image(game->mlx_connection, "./textures/king-tile.xpm", &game->img->img_width, &game->img->img_height);
-	if (!game->img->exit_tile)
+	game->img->exit = mlx_xpm_file_to_image(game->mlx_connection,
+			"./textures/king.xpm", &game->img->img_width,
+			&game->img->img_height);
+	if (!game->img->exit)
 		return (1);
 	return (0);
+}
+
+void	put_image_to_window(t_game *game, int x, int y)
+{
+	if (game->map->map[y][x] == '1')
+		mlx_put_image_to_window(game->mlx_connection, game->mlx_window,
+			game->img->water, x * TILE_SIZE, y * TILE_SIZE);
+	else if (game->map->map[y][x] == '0')
+		mlx_put_image_to_window(game->mlx_connection, game->mlx_window,
+			game->img->tile, x * TILE_SIZE, y * TILE_SIZE);
+	else if (game->map->map[y][x] == 'P')
+		mlx_put_image_to_window(game->mlx_connection, game->mlx_window,
+			game->img->squirrel, x * TILE_SIZE, y * TILE_SIZE);
+	else if (game->map->map[y][x] == 'C')
+		mlx_put_image_to_window(game->mlx_connection, game->mlx_window,
+			game->img->bolota, x * TILE_SIZE, y * TILE_SIZE);
+	else if (game->map->map[y][x] == 'E')
+		mlx_put_image_to_window(game->mlx_connection, game->mlx_window,
+			game->img->exit, x * TILE_SIZE, y * TILE_SIZE);
 }
 
 int	fill_window_map(t_game	*game)
@@ -45,27 +73,21 @@ int	fill_window_map(t_game	*game)
 		x = -1;
 		while (++x < game->map->width)
 		{
-			if (game->map->map[y][x] == '1')
-				mlx_put_image_to_window(game->mlx_connection, game->mlx_window, game->img->water_tile, x * TILE_SIZE, y * TILE_SIZE);
-			else if (game->map->map[y][x] == '0')
-				mlx_put_image_to_window(game->mlx_connection, game->mlx_window, game->img->tile, x * TILE_SIZE, y * TILE_SIZE);
-			else if (game->map->map[y][x] == 'P')
-				mlx_put_image_to_window(game->mlx_connection, game->mlx_window, game->img->squirrel_tile, x * TILE_SIZE, y * TILE_SIZE);
-			else if (game->map->map[y][x] == 'C')
-				mlx_put_image_to_window(game->mlx_connection, game->mlx_window, game->img->bolota_tile, x * TILE_SIZE, y * TILE_SIZE);
-			else if (game->map->map[y][x] == 'E')
-				mlx_put_image_to_window(game->mlx_connection, game->mlx_window, game->img->exit_tile, x * TILE_SIZE, y * TILE_SIZE);
+			put_image_to_window(game, x, y);
 		}
 	}
 	mlx_key_hook(game->mlx_window, handle_pressed_key, game);
 	return (0);
 }
+
 int	render_window(t_game *game)
 {
 	game->mlx_connection = mlx_init();
 	if (!game->mlx_connection)
 		return (1);
-	game->mlx_window = mlx_new_window(game->mlx_connection, game->map->width * TILE_SIZE, game->map->height * TILE_SIZE, "so_long");
+	game->mlx_window = mlx_new_window(game->mlx_connection,
+			game->map->width * TILE_SIZE, game->map->height * TILE_SIZE,
+			"so_long");
 	if (!game->mlx_window)
 	{
 		mlx_destroy_display(game->mlx_connection);

@@ -6,7 +6,7 @@
 /*   By: mjoao-fr <mjoao-fr@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 15:59:40 by mjoao-fr          #+#    #+#             */
-/*   Updated: 2025/06/22 01:09:59 by mjoao-fr         ###   ########.fr       */
+/*   Updated: 2025/06/22 01:31:27 by mjoao-fr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int	init_structs(t_game *game)
 	return (0);
 }
 
-int main(int ac, char **av)
+int	main(int ac, char **av)
 {
 	int			fd;
 	t_game		game;
@@ -67,17 +67,20 @@ int main(int ac, char **av)
 	if (ac != 2)
 		return (ft_printf("%sError.\nMissing map.%s\n", RED, DEFAULT));
 	if (check_extension(av[1]) == 1)
-		return(ft_printf("%sError.\nMust be <name>.ber.%s\n", RED, DEFAULT));
+		return (ft_printf("%sError.\nMust be <name>.ber.%s\n", RED, DEFAULT));
 	fd = open(av[1], O_RDONLY);
 	if (fd == -1)
 		return (ft_printf("%sError.\nCan't read map.%s\n", RED, DEFAULT));
 	if (init_structs(&game) != 0)
-		return (ft_printf("%sError.\nCan't allocate memory.%s\n", RED, DEFAULT));
+		return (ft_printf("%sError.\nCan't allocate memory.%s\n"
+				, RED, DEFAULT));
 	game.map->map = fill_map(fd, game.map, av[1]);
 	if (!game.map->map || validate_map(game.map, game.player) == 1)
-		return (free_game(&game), ft_printf("%sError.\nInvalid Map.%s\n", RED, DEFAULT));
+		return (free_game(&game), ft_printf("%sError.\nInvalid Map.%s\n"
+				, RED, DEFAULT));
 	if (render_window(&game) == 1)
-		return (free_game(&game), ft_printf("%sError.\nCan't render window.%s\n", RED, DEFAULT));
+		return (free_game(&game), ft_printf("%sError.\nCan't render window.%s\n"
+				, RED, DEFAULT));
 	free_game(&game);
 	return (0);
 }

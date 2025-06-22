@@ -6,7 +6,7 @@
 /*   By: mjoao-fr <mjoao-fr@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 11:02:23 by mjoao-fr          #+#    #+#             */
-/*   Updated: 2025/06/22 00:59:57 by mjoao-fr         ###   ########.fr       */
+/*   Updated: 2025/06/22 01:55:30 by mjoao-fr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,13 @@
 
 int	validate_chars(char *str, int curr_size, t_map *map)
 {
-	int i;
-	
+	int	i;
+
 	i = 0;
 	while (str[i] != '\n' && str[i])
 	{
-		if (str[i] != '0' && str[i] != '1' && str[i] != 'C' && str[i] != 'E' && str[i] != 'P')
+		if (str[i] != '0' && str[i] != '1' && str[i] != 'C'
+			&& str[i] != 'E' && str[i] != 'P')
 			return (1);
 		if ((i == 0 || i == (curr_size - 1)) && str[i] != '1')
 			return (1);
@@ -55,11 +56,11 @@ int	validate_first_last_line(char **map, int j)
 	return (0);
 }
 
-int validate_map(t_map *map, t_player *player)
+int	validate_map(t_map *map, t_player *player)
 {
-	int j;
-	int curr_size;
-	int prev_size;
+	int	j;
+	int	curr_size;
+	int	prev_size;
 
 	j = 0;
 	prev_size = 0;
@@ -77,7 +78,8 @@ int validate_map(t_map *map, t_player *player)
 	map->width = curr_size;
 	if (map->nr_exit != 1 || map->nr_start != 1 || map->nr_collect < 1)
 		return (1);
-	if ((validate_first_last_line(map->map, j - 1) != 0) || (validate_path(map, player) == 1))
+	if ((validate_first_last_line(map->map, j - 1) != 0)
+		|| (validate_path(map, player) == 1))
 		return (1);
 	return (0);
 }
@@ -85,7 +87,7 @@ int validate_map(t_map *map, t_player *player)
 int	check_extension(char *str)
 {
 	char		*ext;
-	
+
 	if (!ft_strncmp(str, ".ber", 5))
 		return (1);
 	ext = ft_strrchr(str, '.');

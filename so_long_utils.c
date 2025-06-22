@@ -6,7 +6,7 @@
 /*   By: mjoao-fr <mjoao-fr@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 18:13:37 by mjoao-fr          #+#    #+#             */
-/*   Updated: 2025/06/21 16:34:56 by mjoao-fr         ###   ########.fr       */
+/*   Updated: 2025/06/22 01:54:06 by mjoao-fr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,18 +57,19 @@ void	free_map(char **map, int height)
 	}
 	free(map);
 }
+
 void	free_images(t_game *game)
 {
 	if (game->img->tile)
 		mlx_destroy_image(game->mlx_connection, game->img->tile);
-	if (game->img->water_tile)
-		mlx_destroy_image(game->mlx_connection, game->img->water_tile);
-	if (game->img->squirrel_tile)
-		mlx_destroy_image(game->mlx_connection, game->img->squirrel_tile);
-	if (game->img->bolota_tile)
-		mlx_destroy_image(game->mlx_connection, game->img->bolota_tile);
-	if (game->img->exit_tile)
-	mlx_destroy_image(game->mlx_connection, game->img->exit_tile);
+	if (game->img->water)
+		mlx_destroy_image(game->mlx_connection, game->img->water);
+	if (game->img->squirrel)
+		mlx_destroy_image(game->mlx_connection, game->img->squirrel);
+	if (game->img->bolota)
+		mlx_destroy_image(game->mlx_connection, game->img->bolota);
+	if (game->img->exit)
+		mlx_destroy_image(game->mlx_connection, game->img->exit);
 }
 
 int	free_game(t_game *game)

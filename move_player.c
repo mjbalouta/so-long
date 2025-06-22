@@ -6,7 +6,7 @@
 /*   By: mjoao-fr <mjoao-fr@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/21 11:58:56 by mjoao-fr          #+#    #+#             */
-/*   Updated: 2025/06/21 16:59:20 by mjoao-fr         ###   ########.fr       */
+/*   Updated: 2025/06/22 01:39:27 by mjoao-fr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	check_moves(t_game *game, int x, int y)
 		return ;
 	}
 	if (game->map->map[new_y][new_x] == 'C')
-			game->player->collected++;
+		game->player->collected++;
 	game->map->map[game->player->y][game->player->x] = '0';
 	game->map->map[game->player->y + y][game->player->x + x] = 'P';
 	game->player->x += x;
@@ -59,22 +59,23 @@ void	move_player(t_game *game, int x, int y)
 	new_x = game->player->x + x;
 	new_y = game->player->y + y;
 	if (game->player->collected == game->map->nr_collect)
-		ft_printf("%sOnly the queen of acrons left. Collect in order to win.%s\n", YELLOW, DEFAULT);
-	if (game->map->map[new_y][new_x] == '0' || game->map->map[new_y][new_x] == 'C' || game->map->map[new_y][new_x] == '1')
+		ft_printf("%sOnly the queen of acrons left.%s\n", YELLOW, DEFAULT);
+	if (game->map->map[new_y][new_x] == '0'
+			|| game->map->map[new_y][new_x] == 'C'
+		|| game->map->map[new_y][new_x] == '1')
 		check_moves(game, x, y);
-	else if (game->map->map[new_y][new_x] == 'E' && game->player->collected == game->map->nr_collect)
-	{
-		ft_printf("%sYOU WON! Congrats. You collected all acorns.%s\n", GREEN, DEFAULT);
-		free_game(game);
-		exit(0);
-	}
 	else
 	{
-		ft_printf("%sYOU LOST! You must collect all acorns before collecting the king of acorns.%s\n", RED, DEFAULT);
+		if (game->map->map[new_y][new_x] == 'E'
+				&& game->player->collected == game->map->nr_collect)
+			ft_printf("%sYOU WON! Congrats.%s\n", GREEN, DEFAULT);
+		else
+			ft_printf("%sYOU LOST! You must collect all acorns"
+				"before collecting the king of acorns.%s\n", RED, DEFAULT);
 		free_game(game);
 		exit(0);
 	}
-	ft_printf("You used %d moves.\n", game->moves);
+	ft_printf("You moved %d time(s).\n", game->moves);
 	free_images(game);
 	fill_window_map(game);
 }
