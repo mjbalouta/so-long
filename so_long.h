@@ -6,7 +6,7 @@
 /*   By: mjoao-fr <mjoao-fr@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 15:59:15 by mjoao-fr          #+#    #+#             */
-/*   Updated: 2025/06/21 16:52:07 by mjoao-fr         ###   ########.fr       */
+/*   Updated: 2025/06/22 01:08:25 by mjoao-fr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,9 +88,9 @@ int		line_len(char *str);
 char	**mapdup(t_map *map);
 void	free_map(char **map, int height);
 int		free_game(t_game *game);
-void	fill_window_map(t_game *game);
-void	render_window(t_game *game);
-void	create_img(t_game *game);
+int		fill_window_map(t_game *game);
+int		render_window(t_game *game);
+int		create_img(t_game *game);
 int		handle_pressed_key(int keysym, t_game *game);
 void	move_player(t_game *game, int x, int y);
 void	check_moves(t_game *game, int x, int y);

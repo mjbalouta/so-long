@@ -6,7 +6,7 @@
 /*   By: mjoao-fr <mjoao-fr@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 11:02:23 by mjoao-fr          #+#    #+#             */
-/*   Updated: 2025/06/15 22:20:35 by mjoao-fr         ###   ########.fr       */
+/*   Updated: 2025/06/22 00:59:57 by mjoao-fr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,11 @@ int	check_extension(char *str)
 {
 	char		*ext;
 	
+	if (!ft_strncmp(str, ".ber", 5))
+		return (1);
 	ext = ft_strrchr(str, '.');
+	if (!ext)
+		return (1);
 	if (ext[1] != 'b' || ext[2] != 'e' || ext[3] != 'r' || ext[4])
 		return (1);
 	return (0);
