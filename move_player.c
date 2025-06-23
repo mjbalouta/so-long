@@ -6,7 +6,7 @@
 /*   By: mjoao-fr <mjoao-fr@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/21 11:58:56 by mjoao-fr          #+#    #+#             */
-/*   Updated: 2025/06/23 18:52:19 by mjoao-fr         ###   ########.fr       */
+/*   Updated: 2025/06/23 18:59:13 by mjoao-fr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	check_win_or_loss(t_game *game, int x, int y)
 		ft_printf("%sYOU WON! Congrats.%s\n", GREEN, DEFAULT);
 	else
 		ft_printf("%sYOU LOST! You must collect all acorns"
-			" before collecting the king of acorns.%s\n", RED, DEFAULT);
+			" before collecting the queen of acorns.%s\n", RED, DEFAULT);
 	game->map->map[game->player->y][game->player->x] = '0';
 	game->map->map[game->player->y + y][game->player->x + x] = 'P';
 	game->player->x += x;
