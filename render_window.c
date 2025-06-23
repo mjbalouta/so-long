@@ -6,7 +6,7 @@
 /*   By: mjoao-fr <mjoao-fr@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 14:30:26 by mjoao-fr          #+#    #+#             */
-/*   Updated: 2025/06/22 01:53:11 by mjoao-fr         ###   ########.fr       */
+/*   Updated: 2025/06/23 10:31:45 by mjoao-fr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,12 @@ int	fill_window_map(t_game	*game)
 	return (0);
 }
 
+int	handle_close(t_game *game)
+{
+	mlx_loop_end(game->mlx_connection);
+	return (0);
+}
+
 int	render_window(t_game *game)
 {
 	game->mlx_connection = mlx_init();
@@ -96,7 +102,7 @@ int	render_window(t_game *game)
 	}
 	if (fill_window_map(game) == 1)
 		return (1);
-	mlx_hook(game->mlx_window, 17, 0, free_game, game);
+	mlx_hook(game->mlx_window, 17, 0, &handle_close, game);
 	mlx_loop(game->mlx_connection);
 	return (0);
 }

@@ -17,15 +17,19 @@ SRCS        = main.c validate_map.c so_long_utils.c check_path.c render_window.c
 OBJS        = $(SRCS:.c=.o)
 LIBFT_DIR   = ./libft-projects
 LIBFT       = $(LIBFT_DIR)/complete_libft.a
+MLX			= ./minilibx-linux/libmlx_Linux.a
 
 all: $(NAME)
 
-$(NAME): $(LIBFT) $(OBJS)
+$(NAME): $(LIBFT) $(MLX) $(OBJS)
 	@echo "Compiling..."
-	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT) minilibx-linux/libmlx_Linux.a -lXext -lX11 -lm -lz -o $(NAME)
+	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(MLX) -lXext -lX11 -lm -lz -o $(NAME)
 
 $(LIBFT):
 	@$(MAKE) -C $(LIBFT_DIR) > /dev/null
+
+$(MLX):
+	@$(MAKE) -C ./minilibx-linux > /dev/null
 
 %.o: %.c so_long.h
 	@$(CC) $(CFLAGS) -I/usr/include -O3 -c $< -o $@
@@ -41,5 +45,10 @@ fclean: clean
 	@rm -f $(NAME)
 
 re: fclean all
+
+download:
+	@wget https://cdn.intra.42.fr/document/document/36126/minilibx-linux.tgz
+	@tar -xzf minilibx-linux.tgz
+	@rm minilibx-linux.tgz
 
 .PHONY: all clean fclean re

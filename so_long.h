@@ -6,7 +6,7 @@
 /*   By: mjoao-fr <mjoao-fr@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 15:59:15 by mjoao-fr          #+#    #+#             */
-/*   Updated: 2025/06/22 02:01:31 by mjoao-fr         ###   ########.fr       */
+/*   Updated: 2025/06/23 11:02:50 by mjoao-fr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,5 +97,6 @@ void	move_player(t_game *game, int x, int y);
 void	check_moves(t_game *game, int x, int y);
 void	free_images(t_game *game);
 int		init_structs(t_game *game);
+int		handle_close(t_game *game);
 
 #endif

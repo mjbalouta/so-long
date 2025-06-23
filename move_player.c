@@ -6,7 +6,7 @@
 /*   By: mjoao-fr <mjoao-fr@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/21 11:58:56 by mjoao-fr          #+#    #+#             */
-/*   Updated: 2025/06/22 01:39:27 by mjoao-fr         ###   ########.fr       */
+/*   Updated: 2025/06/23 10:58:02 by mjoao-fr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	move_player(t_game *game, int x, int y)
 			ft_printf("%sYOU WON! Congrats.%s\n", GREEN, DEFAULT);
 		else
 			ft_printf("%sYOU LOST! You must collect all acorns"
-				"before collecting the king of acorns.%s\n", RED, DEFAULT);
+				" before collecting the king of acorns.%s\n", RED, DEFAULT);
 		free_game(game);
 		exit(0);
 	}
