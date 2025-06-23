@@ -6,7 +6,7 @@
 /*   By: mjoao-fr <mjoao-fr@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 12:06:25 by mjoao-fr          #+#    #+#             */
-/*   Updated: 2025/06/23 14:36:12 by mjoao-fr         ###   ########.fr       */
+/*   Updated: 2025/06/23 14:41:26 by mjoao-fr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,6 @@ char	**flood_fill(t_map *map, t_player *player)
 	j = -1;
 	while (dup[++j])
 	{
-		ft_printf("before: %s\n", dup[j]);
-	}
-	j = 0;
-	while (dup[++j])
-	{
 		i = 0;
 		while (dup[j][i])
 		{
@@ -56,12 +51,6 @@ char	**flood_fill(t_map *map, t_player *player)
 			}
 			i++;
 		}
-	}
-	j = 0;
-	while (dup[j])
-	{
-		ft_printf("after: %s\n", dup[j]);
-		j++;
 	}
 	return (dup);
 }
