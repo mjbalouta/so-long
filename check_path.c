@@ -6,7 +6,7 @@
 /*   By: mjoao-fr <mjoao-fr@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 12:06:25 by mjoao-fr          #+#    #+#             */
-/*   Updated: 2025/06/23 15:11:41 by mjoao-fr         ###   ########.fr       */
+/*   Updated: 2025/06/23 15:18:11 by mjoao-fr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	fill(char **dup, t_point current, t_map *map, char to_avoid1)
 {
+	//contar se existe o E aqui e guardar numa variavel e preencher na mesma o E com R
 	if ((current.x < 0 || current.y < 0 || current.x >= map->width
 			|| current.y >= map->height)
 		|| dup[current.y][current.x] == to_avoid1
