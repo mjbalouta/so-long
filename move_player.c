@@ -6,7 +6,7 @@
 /*   By: mjoao-fr <mjoao-fr@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/21 11:58:56 by mjoao-fr          #+#    #+#             */
-/*   Updated: 2025/06/23 18:49:25 by mjoao-fr         ###   ########.fr       */
+/*   Updated: 2025/06/23 18:52:19 by mjoao-fr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ void	check_win_or_loss(t_game *game, int x, int y)
 
 	new_x = game->player->x + x;
 	new_y = game->player->y + y;
-	
 	game->moves++;
 	ft_printf("You moved %d time(s).\n", game->moves);
 	if (game->map->map[new_y][new_x] == 'E'
