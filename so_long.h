@@ -6,7 +6,7 @@
 /*   By: mjoao-fr <mjoao-fr@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 15:59:15 by mjoao-fr          #+#    #+#             */
-/*   Updated: 2025/06/23 14:36:20 by mjoao-fr         ###   ########.fr       */
+/*   Updated: 2025/06/23 18:43:01 by mjoao-fr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,9 @@ typedef struct s_point
 char	**fill_map(int fd, t_map *map, char *file);
 int		validate_chars(char *str, int curr_size, t_map *map);
 int		validate_first_last_line(char **map, int j);
-void	fill(char **dup, t_point current, t_map *map, char to_avoid1);
-char	**flood_fill(t_map *map, t_player *player);
+void	first_fill(t_map *dup, t_point current, t_map *map, char to_avoid);
+void	second_fill(t_map *dup, t_point current, t_map *map, char to_avoid);
+void	flood_fill(t_map *dup, t_player *player, t_map *map);
 int		validate_path(t_map *map, t_player *player);
 int		validate_map(t_map *map, t_player *player);
 int		check_extension(char *str);
@@ -95,6 +96,7 @@ int		create_img(t_game *game);
 int		handle_pressed_key(int keysym, t_game *game);
 void	move_player(t_game *game, int x, int y);
 void	check_moves(t_game *game, int x, int y);
+void	check_win_or_loss(t_game *game, int x, int y);
 void	free_images(t_game *game);
 int		init_structs(t_game *game);
 int		handle_close(t_game *game);

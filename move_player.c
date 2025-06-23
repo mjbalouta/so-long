@@ -6,7 +6,7 @@
 /*   By: mjoao-fr <mjoao-fr@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/21 11:58:56 by mjoao-fr          #+#    #+#             */
-/*   Updated: 2025/06/23 10:58:02 by mjoao-fr         ###   ########.fr       */
+/*   Updated: 2025/06/23 18:49:25 by mjoao-fr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,34 @@ void	check_moves(t_game *game, int x, int y)
 	game->moves++;
 }
 
+void	check_win_or_loss(t_game *game, int x, int y)
+{
+	int	new_x;
+	int	new_y;
+
+	new_x = game->player->x + x;
+	new_y = game->player->y + y;
+	
+	game->moves++;
+	ft_printf("You moved %d time(s).\n", game->moves);
+	if (game->map->map[new_y][new_x] == 'E'
+			&& game->player->collected == game->map->nr_collect)
+		ft_printf("%sYOU WON! Congrats.%s\n", GREEN, DEFAULT);
+	else
+		ft_printf("%sYOU LOST! You must collect all acorns"
+			" before collecting the king of acorns.%s\n", RED, DEFAULT);
+	game->map->map[game->player->y][game->player->x] = '0';
+	game->map->map[game->player->y + y][game->player->x + x] = 'P';
+	game->player->x += x;
+	game->player->y += y;
+	free_images(game);
+	fill_window_map(game);
+	mlx_do_sync(game->mlx_connection);
+	usleep(200000);
+	free_game(game);
+	exit(0);
+}
+
 void	move_player(t_game *game, int x, int y)
 {
 	int	new_x;
@@ -65,16 +93,7 @@ void	move_player(t_game *game, int x, int y)
 		|| game->map->map[new_y][new_x] == '1')
 		check_moves(game, x, y);
 	else
-	{
-		if (game->map->map[new_y][new_x] == 'E'
-				&& game->player->collected == game->map->nr_collect)
-			ft_printf("%sYOU WON! Congrats.%s\n", GREEN, DEFAULT);
-		else
-			ft_printf("%sYOU LOST! You must collect all acorns"
-				" before collecting the king of acorns.%s\n", RED, DEFAULT);
-		free_game(game);
-		exit(0);
-	}
+		check_win_or_loss(game, x, y);
 	ft_printf("You moved %d time(s).\n", game->moves);
 	free_images(game);
 	fill_window_map(game);

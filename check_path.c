@@ -6,91 +6,83 @@
 /*   By: mjoao-fr <mjoao-fr@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 12:06:25 by mjoao-fr          #+#    #+#             */
-/*   Updated: 2025/06/23 15:18:11 by mjoao-fr         ###   ########.fr       */
+/*   Updated: 2025/06/23 18:30:54 by mjoao-fr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	fill(char **dup, t_point current, t_map *map, char to_avoid1)
+void	first_fill(t_map *dup, t_point current, t_map *map, char to_avoid)
 {
-	//contar se existe o E aqui e guardar numa variavel e preencher na mesma o E com R
 	if ((current.x < 0 || current.y < 0 || current.x >= map->width
 			|| current.y >= map->height)
-		|| dup[current.y][current.x] == to_avoid1
-	|| dup[current.y][current.x] == 'E'
-	|| dup[current.y][current.x] == 'R')
+		|| dup->map[current.y][current.x] == to_avoid
+	|| dup->map[current.y][current.x] == 'F'
+	|| dup->map[current.y][current.x] == '1')
 		return ;
-	dup[current.y][current.x] = 'R';
-	fill(dup, (t_point){current.x, current.y - 1}, map, '1');
-	fill(dup, (t_point){current.x, current.y + 1}, map, '1');
-	fill(dup, (t_point){current.x - 1, current.y}, map, '1');
-	fill(dup, (t_point){current.x + 1, current.y}, map, '1');
+	if (dup->map[current.y][current.x] == 'C')
+		dup->nr_collect++;
+	dup->map[current.y][current.x] = 'F';
+	first_fill(dup, (t_point){current.x, current.y - 1}, map, 'E');
+	first_fill(dup, (t_point){current.x, current.y + 1}, map, 'E');
+	first_fill(dup, (t_point){current.x - 1, current.y}, map, 'E');
+	first_fill(dup, (t_point){current.x + 1, current.y}, map, 'E');
 }
 
-char	**flood_fill(t_map *map, t_player *player)
+void	second_fill(t_map *dup, t_point current, t_map *map, char to_avoid)
 {
-	char	**dup;
+	if ((current.x < 0 || current.y < 0 || current.x >= map->width
+			|| current.y >= map->height)
+		|| dup->map[current.y][current.x] == to_avoid)
+		return ;
+	if (dup->map[current.y][current.x] == 'E')
+		dup->nr_exit++;
+	dup->map[current.y][current.x] = '1';
+	second_fill(dup, (t_point){current.x, current.y - 1}, map, '1');
+	second_fill(dup, (t_point){current.x, current.y + 1}, map, '1');
+	second_fill(dup, (t_point){current.x - 1, current.y}, map, '1');
+	second_fill(dup, (t_point){current.x + 1, current.y}, map, '1');
+}
+
+void	flood_fill(t_map *dup, t_player *player, t_map *map)
+{
 	int		i;
 	int		j;
 	t_point	begin;
 
-	dup = mapdup(map);
+	ft_memset(&begin, 0, sizeof(t_point));
+	dup->map = mapdup(map);
 	j = -1;
-	while (dup[++j])
+	while (dup->map[++j])
 	{
-		i = 0;
-		while (dup[j][i])
+		i = -1;
+		while (dup->map[j][++i])
 		{
-			if (dup[j][i] == 'P')
+			if (dup->map[j][i] == 'P')
 			{
 				player->x = i;
 				player->y = j;
 				begin.x = i;
 				begin.y = j;
-				fill(dup, begin, map, '1');
+				first_fill(dup, begin, map, 'E');
 				break ;
 			}
-			i++;
 		}
 	}
-	j = 0;
-	while (dup[j])
-	{
-		ft_printf("%s\n", dup[j]);
-		j++;
-	}
-	return (dup);
+	second_fill(dup, begin, map, '1');
 }
 
 int	validate_path(t_map *map, t_player *player)
 {
-	char	**dup;
-	int		i;
-	int		j;
-	int		count_c;
-	int		count_e;
+	t_map	dup;
 
-	dup = flood_fill(map, player);
-	j = 0;
-	i = 0;
-	count_c = 0;
-	count_e = 0;
-	while (dup[j])
+	ft_memset(&dup, 0, sizeof(t_map));
+	flood_fill(&dup, player, map);
+	if (dup.nr_collect != map->nr_collect || dup.nr_exit == 0)
 	{
-		i = 0;
-		while (dup[j][i])
-		{
-			if (dup[j][i] == 'C')
-				count_c++;
-			if (dup[j][i] == 'E')
-				count_e++;
-			i++;
-		}
-		j++;
+		free_map(dup.map, map->height);
+		return (1);
 	}
-	if (!count_e && !count_c)
-		return (free_map(dup, map->height), 1);
-	free_map(dup, map->height);
+	free_map(dup.map, map->height);
 	return (0);
 }
