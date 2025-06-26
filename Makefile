@@ -43,6 +43,7 @@ fclean: clean
 	@echo "Removing executable..."
 	@$(MAKE) fclean -C $(LIBFT_DIR) > /dev/null
 	@rm -f $(NAME)
+	@rm -rf ./minilibx-linux
 
 re: fclean all
 
