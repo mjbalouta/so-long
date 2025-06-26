@@ -6,7 +6,7 @@
 /*   By: mjoao-fr <mjoao-fr@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 14:30:26 by mjoao-fr          #+#    #+#             */
-/*   Updated: 2025/06/23 10:31:45 by mjoao-fr         ###   ########.fr       */
+/*   Updated: 2025/06/26 15:29:09 by mjoao-fr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,10 @@ int	create_img(t_game	*game)
 			&game->img->img_height);
 	if (!game->img->squirrel)
 		return (1);
-	game->img->bolota = mlx_xpm_file_to_image(game->mlx_connection,
+	game->img->acorn = mlx_xpm_file_to_image(game->mlx_connection,
 			"./textures/bolota.xpm", &game->img->img_width,
 			&game->img->img_height);
-	if (!game->img->bolota)
+	if (!game->img->acorn)
 		return (1);
 	game->img->exit = mlx_xpm_file_to_image(game->mlx_connection,
 			"./textures/king.xpm", &game->img->img_width,
@@ -54,7 +54,7 @@ void	put_image_to_window(t_game *game, int x, int y)
 			game->img->squirrel, x * TILE_SIZE, y * TILE_SIZE);
 	else if (game->map->map[y][x] == 'C')
 		mlx_put_image_to_window(game->mlx_connection, game->mlx_window,
-			game->img->bolota, x * TILE_SIZE, y * TILE_SIZE);
+			game->img->acorn, x * TILE_SIZE, y * TILE_SIZE);
 	else if (game->map->map[y][x] == 'E')
 		mlx_put_image_to_window(game->mlx_connection, game->mlx_window,
 			game->img->exit, x * TILE_SIZE, y * TILE_SIZE);

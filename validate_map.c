@@ -6,7 +6,7 @@
 /*   By: mjoao-fr <mjoao-fr@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 11:02:23 by mjoao-fr          #+#    #+#             */
-/*   Updated: 2025/06/23 11:11:51 by mjoao-fr         ###   ########.fr       */
+/*   Updated: 2025/06/26 15:26:38 by mjoao-fr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ int	validate_first_last_line(char **map, int j)
 	int	i;
 
 	i = 0;
+	if (map[0][0] == '\n')
+		return (1);
 	while (map[0][i] && map[0][i] != '\n')
 	{
 		if (map[0][i] != '1')

@@ -6,7 +6,7 @@
 /*   By: mjoao-fr <mjoao-fr@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 18:13:37 by mjoao-fr          #+#    #+#             */
-/*   Updated: 2025/06/23 17:41:58 by mjoao-fr         ###   ########.fr       */
+/*   Updated: 2025/06/26 15:30:48 by mjoao-fr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,8 @@ void	free_images(t_game *game)
 		mlx_destroy_image(game->mlx_connection, game->img->water);
 	if (game->img->squirrel)
 		mlx_destroy_image(game->mlx_connection, game->img->squirrel);
-	if (game->img->bolota)
-		mlx_destroy_image(game->mlx_connection, game->img->bolota);
+	if (game->img->acorn)
+		mlx_destroy_image(game->mlx_connection, game->img->acorn);
 	if (game->img->exit)
 		mlx_destroy_image(game->mlx_connection, game->img->exit);
 }

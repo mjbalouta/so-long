@@ -6,7 +6,7 @@
 /*   By: mjoao-fr <mjoao-fr@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 15:59:15 by mjoao-fr          #+#    #+#             */
-/*   Updated: 2025/06/23 18:43:01 by mjoao-fr         ###   ########.fr       */
+/*   Updated: 2025/06/26 15:28:15 by mjoao-fr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ typedef struct s_tile
 	void	*tile;
 	void	*water;
 	void	*squirrel;
-	void	*bolota;
+	void	*acorn;
 	void	*exit;	
 }				t_tile;
 

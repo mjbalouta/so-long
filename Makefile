@@ -11,7 +11,7 @@
 # **************************************************************************** #
 
 CC          = cc
-CFLAGS      = -Wall -Wextra -Werror -I$(LIBFT_DIR)
+CFLAGS      = -Wall -Wextra -Werror -I$(LIBFT_DIR) -g
 NAME        = so_long
 SRCS        = main.c validate_map.c so_long_utils.c check_path.c render_window.c move_player.c
 OBJS        = $(SRCS:.c=.o)
