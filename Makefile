@@ -11,9 +11,11 @@
 # **************************************************************************** #
 
 CC          = cc
-CFLAGS      = -Wall -Wextra -Werror -I$(LIBFT_DIR) -g
+HEADER_FILE = includes
+INCLUDES	= -I$(LIBFT_DIR)/libft -I$(LIBFT_DIR)/get-next-line -I$(LIBFT_DIR)/printf -I$(HEADER_FILE) -Iminilibx-linux
+CFLAGS      = -Wall -Wextra -Werror $(INCLUDES) -g
 NAME        = so_long
-SRCS        = main.c validate_map.c so_long_utils.c check_path.c render_window.c move_player.c
+SRCS        = srcs/main.c srcs/validate_map.c srcs/so_long_utils.c srcs/check_path.c srcs/render_window.c srcs/move_player.c
 OBJS        = $(SRCS:.c=.o)
 LIBFT_DIR   = ./libft-projects
 LIBFT       = $(LIBFT_DIR)/complete_libft.a

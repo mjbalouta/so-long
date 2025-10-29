@@ -6,7 +6,7 @@
 /*   By: mjoao-fr <mjoao-fr@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 15:59:15 by mjoao-fr          #+#    #+#             */
-/*   Updated: 2025/06/26 15:28:15 by mjoao-fr         ###   ########.fr       */
+/*   Updated: 2025/10/29 15:27:39 by mjoao-fr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@
 # define DEFAULT "\033[0m"
 # define YELLOW "\033[38;5;178m"
 
-# include "./libft-projects/get-next-line/get_next_line.h"
-# include "./libft-projects/libft/libft.h"
-# include "./libft-projects/printf/libftprintf.h"
-# include "./minilibx-linux/mlx.h"
+# include "get_next_line.h"
+# include "libft.h"
+# include "libftprintf.h"
+# include "mlx.h"
 
 typedef struct s_map
 {
