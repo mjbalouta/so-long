@@ -13,8 +13,8 @@ This project's purpose is to improve skills in window management, event handling
 4) Have fun playing my little game!
 
 <div align="center">
-<img src="game_screen.png" alt="game_screen" width="80%"/>
-<img src="terminal_output.png" alt="terminal_output" width="80%"/>
+<img src="images/game_screen.png" alt="game_screen" width="80%"/>
+<img src="images/terminal_output.png" alt="terminal_output" width="80%"/>
 </div>
 
 ### Requirements
